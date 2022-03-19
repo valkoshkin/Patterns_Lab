@@ -165,7 +165,6 @@ public class Car implements Transport {
             clonedModels[i] = models[i].clone();
         }
         clone.models = clonedModels;
-        clone.brand = brand;
         return clone;
     }
 
@@ -199,9 +198,7 @@ public class Car implements Transport {
 
         @Override
         public Model clone() throws CloneNotSupportedException {
-            var copy = (Model) super.clone();
-            copy.name = name;
-            return copy;
+            return (Model) super.clone();
         }
     }
 }

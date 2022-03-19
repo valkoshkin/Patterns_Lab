@@ -164,7 +164,6 @@ public class Motorbike implements Transport {
     @Override
     public Motorbike clone() throws CloneNotSupportedException {
         var clone = (Motorbike) super.clone();
-        clone.brand = brand;
         clone.head = head.clone();
         clone.head.next = clone.head;
         clone.head.prev = clone.head;
@@ -231,7 +230,6 @@ public class Motorbike implements Transport {
         @Override
         public Model clone() throws CloneNotSupportedException {
             var clone = (Model) super.clone();
-            clone.name = name;
             clone.next = next;
             clone.prev = prev;
             return clone;
