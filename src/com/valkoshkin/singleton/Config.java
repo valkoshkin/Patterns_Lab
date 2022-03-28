@@ -22,14 +22,14 @@ public class Config {
         return properties;
     }
 
-    public static Config getInstance() {
+    public static synchronized Config getInstance() {
         if (instance == null) {
             instance = new Config(DEFAULT_PROPERTIES_PATH);
         }
         return instance;
     }
 
-    public static Config getInstance(String path) {
+    public static synchronized Config getInstance(String path) {
         if (instance == null) {
             instance = new Config(path);
         }

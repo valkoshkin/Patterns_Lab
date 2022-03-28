@@ -25,10 +25,13 @@ public class Main {
         try {
             Transport car = TransportUtils.createInstance("BMW", 4);
             addCarModels(car);
+            System.out.println(car.getClass());
 
             TransportUtils.setTransportFactory(new MotorbikeFactory());
             Transport motorbike = TransportUtils.createInstance("Yamaha", 4);
             addMotorbikeModels(motorbike);
+            System.out.println(motorbike.getClass());
+
 
             Transport carClone = car.clone();
             carClone.setModelNameByName("X5", "NEW X5");
