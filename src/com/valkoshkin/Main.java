@@ -1,56 +1,31 @@
 package com.valkoshkin;
 
+import com.valkoshkin.adapter.OutputAdapter;
+import com.valkoshkin.adapter.OutputStreamAdapter;
 import com.valkoshkin.exceptions.DuplicateModelNameException;
-import com.valkoshkin.exceptions.NoSuchModelNameException;
-import com.valkoshkin.factory.MotorbikeFactory;
 import com.valkoshkin.model.Transport;
-import com.valkoshkin.singleton.Config;
 import com.valkoshkin.utils.TransportUtils;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 
 public class Main {
 
+    private static final String[] items = {"first", "second", "third"};
+    private static final String FILE_PATH = "result.txt";
+
     public static void main(String[] args) {
-        testSingleton();
-        System.out.println();
-        testFactoryWithPrototype();
-    }
+        try (var outputStream = new FileOutputStream(FILE_PATH);
+             var inputStream = new BufferedReader(new InputStreamReader(new FileInputStream(FILE_PATH)))) {
+            OutputAdapter adapter = new OutputStreamAdapter(outputStream);
+            adapter.write(items);
 
-    public static void testSingleton() {
-        var properties = Config.getInstance().getConfig();
-        System.out.println("Subject: " + properties.getProperty("subject"));
-        System.out.println("Language: " + properties.getProperty("language"));
-    }
-
-    public static void testFactoryWithPrototype() {
-        try {
-            Transport car = TransportUtils.createInstance("BMW", 4);
-            addCarModels(car);
-            System.out.println(car.getClass());
-
-            TransportUtils.setTransportFactory(new MotorbikeFactory());
-            Transport motorbike = TransportUtils.createInstance("Yamaha", 4);
-            addMotorbikeModels(motorbike);
-            System.out.println(motorbike.getClass());
-
-
-            Transport carClone = car.clone();
-            carClone.setModelNameByName("X5", "NEW X5");
-            carClone.setModelPriceByName("C12", 999.99);
-            Transport motorbikeClone = motorbike.clone();
-            motorbikeClone.setModelNameByName("M-12", "NEW M-12");
-            motorbikeClone.setModelPriceByName("T-41", 999.99);
-
-            System.out.println("\n[Car original]");
-            printTransport(car);
-            System.out.println("\n[Car cloned]");
-            printTransport(carClone);
-
-            System.out.println("\n[Motorbike original]");
-            printTransport(motorbike);
-            System.out.println("\n[Motorbike cloned]");
-            printTransport(motorbikeClone);
-
-        } catch (DuplicateModelNameException | CloneNotSupportedException | NoSuchModelNameException e) {
+            while (inputStream.ready()) {
+                System.out.println(inputStream.readLine());
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

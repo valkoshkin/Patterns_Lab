@@ -2,6 +2,7 @@ package com.valkoshkin.utils;
 
 import com.valkoshkin.factory.CarFactory;
 import com.valkoshkin.factory.TransportFactory;
+import com.valkoshkin.model.SynchronizedTransport;
 import com.valkoshkin.model.Transport;
 
 public class TransportUtils {
@@ -43,5 +44,9 @@ public class TransportUtils {
         for (int i = 0; i < transport.getModelsLength(); i++) {
             System.out.printf("%d. %f%n", i + 1, modelsPrices[i]);
         }
+    }
+
+    public static Transport synchronizedTransport (Transport transport) {
+        return new SynchronizedTransport(transport);
     }
 }
