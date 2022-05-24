@@ -3,6 +3,8 @@ package com.valkoshkin;
 import com.valkoshkin.chain.TransportChainWriter;
 import com.valkoshkin.chain.TransportChainWriterColumn;
 import com.valkoshkin.chain.TransportChainWriterRow;
+import com.valkoshkin.command.PrintCarCommandColumn;
+import com.valkoshkin.command.PrintCarCommandRow;
 import com.valkoshkin.exceptions.DuplicateModelNameException;
 import com.valkoshkin.model.Car;
 import com.valkoshkin.model.Motorbike;
@@ -15,7 +17,8 @@ public class Main {
     private static final String FILE_PATH = "result.txt";
 
     public static void main(String[] args) {
-        testChainOfResponsibility();
+//        testChainOfResponsibility();
+        testCommand();
     }
 
     public static void testChainOfResponsibility() {
@@ -29,6 +32,21 @@ public class Main {
             chainWriter.setNext(new TransportChainWriterColumn(writer));
             chainWriter.write(car);
             chainWriter.write(bike);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void testCommand() {
+        try (FileWriter writer = new FileWriter(FILE_PATH)) {
+            Car car = new Car("BMW", 2);
+            addCarModels(car);
+
+            car.setPrintCommand(new PrintCarCommandRow(car));
+            car.print(writer);
+
+            car.setPrintCommand(new PrintCarCommandColumn(car));
+            car.print(writer);
         } catch (Exception e) {
             e.printStackTrace();
         }

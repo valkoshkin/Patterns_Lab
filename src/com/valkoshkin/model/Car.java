@@ -1,19 +1,39 @@
 package com.valkoshkin.model;
 
+import com.valkoshkin.command.PrintCarCommand;
 import com.valkoshkin.exceptions.DuplicateModelNameException;
 import com.valkoshkin.exceptions.ModelPriceOutOfBoundsException;
 import com.valkoshkin.exceptions.NoSuchModelNameException;
 
-import java.io.Serializable;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Arrays;
 
 public class Car implements Transport {
     private String brand;
     private Model[] models;
 
+    private Writer writer;
+    private PrintCarCommand printCarCommand;
+
     public Car(String brand, int modelsLength) {
         this.brand = brand;
         this.models = new Model[modelsLength];
+    }
+
+    public void setPrintCommand(PrintCarCommand printCarCommand) {
+        this.printCarCommand = printCarCommand;
+    }
+
+    public Writer getWriter() {
+        return writer;
+    }
+
+    public void print(Writer writer) throws IOException {
+        this.writer = writer;
+        if (printCarCommand != null) {
+            printCarCommand.execute();
+        }
     }
 
     private boolean isModelWithNameExist(String name) {
