@@ -18,7 +18,8 @@ public class Main {
 
     public static void main(String[] args) {
 //        testChainOfResponsibility();
-        testCommand();
+//        testCommand();
+        testIterator();
     }
 
     public static void testChainOfResponsibility() {
@@ -52,6 +53,18 @@ public class Main {
         }
     }
 
+    public static void testIterator() {
+        try {
+            IterableCar car = new IterableCar("BMW", 2);
+            addIterableCarModels(car);
+            for (var model : car) {
+                System.out.println(model.toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void addCarModels(Transport transport) throws DuplicateModelNameException {
         transport.addModel("X5", 123);
         transport.addModel("X6", 834);
@@ -65,5 +78,12 @@ public class Main {
         transport.addModel("ZX-2", 712);
         transport.addModel("T-41", 404);
         transport.addModel("RT-10", 670);
+    }
+
+    public static void addIterableCarModels(IterableCar car) throws DuplicateModelNameException {
+        car.addModel("X5", 123);
+        car.addModel("X6", 834);
+        car.addModel("A3", 172.99);
+        car.addModel("C12", 534.12);
     }
 }
