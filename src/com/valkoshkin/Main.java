@@ -1,30 +1,34 @@
 package com.valkoshkin;
 
-import com.valkoshkin.adapter.OutputAdapter;
-import com.valkoshkin.adapter.OutputStreamAdapter;
+import com.valkoshkin.chain.TransportChainWriter;
+import com.valkoshkin.chain.TransportChainWriterColumn;
+import com.valkoshkin.chain.TransportChainWriterRow;
 import com.valkoshkin.exceptions.DuplicateModelNameException;
+import com.valkoshkin.model.Car;
+import com.valkoshkin.model.Motorbike;
 import com.valkoshkin.model.Transport;
-import com.valkoshkin.utils.TransportUtils;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
+import java.io.FileWriter;
 
 public class Main {
 
-    private static final String[] items = {"first", "second", "third"};
     private static final String FILE_PATH = "result.txt";
 
     public static void main(String[] args) {
-        try (var outputStream = new FileOutputStream(FILE_PATH);
-             var inputStream = new BufferedReader(new InputStreamReader(new FileInputStream(FILE_PATH)))) {
-            OutputAdapter adapter = new OutputStreamAdapter(outputStream);
-            adapter.write(items);
+        testChainOfResponsibility();
+    }
 
-            while (inputStream.ready()) {
-                System.out.println(inputStream.readLine());
-            }
+    public static void testChainOfResponsibility() {
+        try (FileWriter writer = new FileWriter(FILE_PATH)) {
+            Transport car = new Car("BMW", 2);
+            Transport bike = new Motorbike("Yamaha", 5);
+            addCarModels(car);
+            addMotorbikeModels(bike);
+
+            TransportChainWriter chainWriter = new TransportChainWriterRow(writer);
+            chainWriter.setNext(new TransportChainWriterColumn(writer));
+            chainWriter.write(car);
+            chainWriter.write(bike);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -33,8 +37,8 @@ public class Main {
     public static void addCarModels(Transport transport) throws DuplicateModelNameException {
         transport.addModel("X5", 123);
         transport.addModel("X6", 834);
-        transport.addModel("A3", 172.99);
-        transport.addModel("C12", 534.12);
+//        transport.addModel("A3", 172.99);
+//        transport.addModel("C12", 534.12);
     }
 
     public static void addMotorbikeModels(Transport transport) throws DuplicateModelNameException {
@@ -42,12 +46,6 @@ public class Main {
         transport.addModel("R-8", 542);
         transport.addModel("ZX-2", 712);
         transport.addModel("T-41", 404);
-    }
-
-    public static void printTransport(Transport transport) {
-        System.out.println("Brand: " + transport.getBrand());
-        System.out.println("Models length: " + transport.getModelsLength());
-        System.out.println("Models:");
-        TransportUtils.printModelsNamesWithPrices(transport);
+        transport.addModel("RT-10", 670);
     }
 }

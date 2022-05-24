@@ -1,4 +1,4 @@
-package com.valkoshkin.factory;
+package com.valkoshkin.deprecated.factory;
 
 import com.valkoshkin.model.Car;
 import com.valkoshkin.model.Transport;

@@ -1,4 +1,4 @@
-package com.valkoshkin.singleton;
+package com.valkoshkin.deprecated.singleton;
 
 import java.io.FileInputStream;
 import java.io.IOException;

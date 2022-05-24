@@ -1,4 +1,4 @@
-package com.valkoshkin.adapter;
+package com.valkoshkin.deprecated.adapter;
 
 import java.io.IOException;
 
