@@ -15,7 +15,7 @@ import java.io.FileWriter;
 
 public class Main {
 
-    private static final String FILE_PATH = "result.txt";
+    private static final String FILE_PATH = "transport/result.txt";
 
     public static void main(String[] args) {
 //        testChainOfResponsibility();
