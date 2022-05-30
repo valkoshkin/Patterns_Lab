@@ -3,7 +3,9 @@ package com.valkoshkin.model;
 import com.valkoshkin.exceptions.DuplicateModelNameException;
 import com.valkoshkin.exceptions.NoSuchModelNameException;
 
-public interface Transport extends Cloneable {
+import java.io.Serializable;
+
+public interface Transport extends Cloneable, Serializable {
     String getBrand();
     void setBrand(String brand);
     int getModelsLength();

@@ -9,6 +9,7 @@ import com.valkoshkin.exceptions.DuplicateModelNameException;
 import com.valkoshkin.model.Car;
 import com.valkoshkin.model.Motorbike;
 import com.valkoshkin.model.Transport;
+import com.valkoshkin.utils.TransportUtils;
 
 import java.io.FileWriter;
 
@@ -19,7 +20,8 @@ public class Main {
     public static void main(String[] args) {
 //        testChainOfResponsibility();
 //        testCommand();
-        testIterator();
+//        testIterator();
+        testMemento();
     }
 
     public static void testChainOfResponsibility() {
@@ -60,6 +62,32 @@ public class Main {
             for (var model : car) {
                 System.out.println(model.toString());
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void testMemento() {
+        try {
+            MementoCar car = new MementoCar("TESTbrand", 2);
+            addCarModels(car);
+
+            var modelNameToEdit = "MODEL";
+            car.addModel(modelNameToEdit, 222);
+
+            System.out.println("Source car:");
+            TransportUtils.printModelsNamesWithPrices(car);
+
+            var memento = car.createMemento();
+            car.setModelPriceByName(modelNameToEdit, 555);
+            car.addModel("new model", 987);
+
+            System.out.println("\nModified car:");
+            TransportUtils.printModelsNamesWithPrices(car);
+
+            car.setMemento(memento);
+            System.out.println("\nRestored source car:");
+            TransportUtils.printModelsNamesWithPrices(car);
         } catch (Exception e) {
             e.printStackTrace();
         }
