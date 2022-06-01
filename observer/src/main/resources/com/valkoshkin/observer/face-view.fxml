@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.shape.QuadCurve?>
+
+<Pane xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.valkoshkin.observer.FaceController">
+    <Ellipse layoutX="300" layoutY="300" radiusX="200" radiusY="250" stroke="gray" fill="white"/>
+    <Pane>
+        <Ellipse radiusX="26" radiusY="20" stroke="lightgray" fill="black" strokeWidth="13" strokeType="INSIDE"
+                layoutX="225" layoutY="150" fx:id="leftEye" onMouseClicked="#onLeftEyeClick"/>
+        <Ellipse radiusX="26" radiusY="20" stroke="lightgray" fill="black" strokeWidth="13" strokeType="INSIDE"
+                layoutX="375" layoutY="150" fx:id="rightEye" onMouseClicked="#onRightEyeClick"/>
+        <Rectangle width="30" height="50" stroke="gray" fill="gray"
+                layoutX="285" layoutY="250" fx:id="nose" onMouseClicked="#onNoseClick"/>
+        <QuadCurve startX="210" startY="400" endX="390" endY="400" controlX="300" controlY="400"
+                   fill="gray" stroke="gray" strokeWidth="10" fx:id="lips" onMouseClicked="#onLipsClick"/>
+    </Pane>
+</Pane>
