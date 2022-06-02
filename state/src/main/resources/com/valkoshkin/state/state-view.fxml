@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.ImageView?>
+<Pane xmlns:fx="http://javafx.com/fxml" fx:controller="com.valkoshkin.state.StateController">
+    <HBox>
+        <Button text="Семестр" onAction="#onSemesterButtonClick"/>
+        <Button text="Сессия" onAction="#onSessionButtonClick"/>
+        <Button text="Каникулы" onAction="#onVacationButtonClick"/>
+    </HBox>
+    <ImageView fx:id="imageView" layoutX="10" layoutY="50" fitHeight="400" fitWidth="500" />
+</Pane>
