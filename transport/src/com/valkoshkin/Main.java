@@ -10,6 +10,8 @@ import com.valkoshkin.model.Car;
 import com.valkoshkin.model.Motorbike;
 import com.valkoshkin.model.Transport;
 import com.valkoshkin.utils.TransportUtils;
+import com.valkoshkin.visitor.PrintVisitor;
+import com.valkoshkin.visitor.Visitor;
 
 import java.io.FileWriter;
 
@@ -21,7 +23,8 @@ public class Main {
 //        testChainOfResponsibility();
 //        testCommand();
 //        testIterator();
-        testMemento();
+//        testMemento();
+        testVisitor();
     }
 
     public static void testChainOfResponsibility() {
@@ -88,6 +91,24 @@ public class Main {
             car.setMemento(memento);
             System.out.println("\nRestored source car:");
             TransportUtils.printModelsNamesWithPrices(car);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void testVisitor() {
+        try {
+            Transport car = new Car("BMW", 2);
+            Transport bike = new Motorbike("Yamaha", 5);
+            addCarModels(car);
+            addMotorbikeModels(bike);
+
+            Visitor visitor = new PrintVisitor();
+
+            System.out.println("Print car (row):\n");
+            car.accept(visitor);
+            System.out.println("Print motorbike (column):\n");
+            bike.accept(visitor);
         } catch (Exception e) {
             e.printStackTrace();
         }

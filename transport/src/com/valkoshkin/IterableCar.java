@@ -5,6 +5,7 @@ import com.valkoshkin.exceptions.DuplicateModelNameException;
 import com.valkoshkin.exceptions.ModelPriceOutOfBoundsException;
 import com.valkoshkin.exceptions.NoSuchModelNameException;
 import com.valkoshkin.model.Transport;
+import com.valkoshkin.visitor.Visitor;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -188,6 +189,11 @@ public class IterableCar implements Transport, Iterable<IterableCar.Model> {
         }
         clone.models = clonedModels;
         return clone;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+
     }
 
     public Iterator<Model> iterator() {

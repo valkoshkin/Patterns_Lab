@@ -3,6 +3,7 @@ package com.valkoshkin.model;
 import com.valkoshkin.exceptions.DuplicateModelNameException;
 import com.valkoshkin.exceptions.ModelPriceOutOfBoundsException;
 import com.valkoshkin.exceptions.NoSuchModelNameException;
+import com.valkoshkin.visitor.Visitor;
 
 public class Motorbike implements Transport {
     private String brand;
@@ -179,6 +180,11 @@ public class Motorbike implements Transport {
         }
 
         return clone;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     private class Model implements Cloneable {

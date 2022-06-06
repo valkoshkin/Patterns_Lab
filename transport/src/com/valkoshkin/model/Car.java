@@ -4,6 +4,7 @@ import com.valkoshkin.command.PrintCarCommand;
 import com.valkoshkin.exceptions.DuplicateModelNameException;
 import com.valkoshkin.exceptions.ModelPriceOutOfBoundsException;
 import com.valkoshkin.exceptions.NoSuchModelNameException;
+import com.valkoshkin.visitor.Visitor;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -186,6 +187,11 @@ public class Car implements Transport {
         }
         clone.models = clonedModels;
         return clone;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     private class Model implements Cloneable {

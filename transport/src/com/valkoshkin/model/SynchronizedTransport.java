@@ -2,6 +2,7 @@ package com.valkoshkin.model;
 
 import com.valkoshkin.exceptions.DuplicateModelNameException;
 import com.valkoshkin.exceptions.NoSuchModelNameException;
+import com.valkoshkin.visitor.Visitor;
 
 public class SynchronizedTransport implements Transport {
     private final Transport transport;
@@ -63,5 +64,10 @@ public class SynchronizedTransport implements Transport {
     @Override
     public Transport clone() throws CloneNotSupportedException {
         return new SynchronizedTransport(transport.clone());
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+
     }
 }

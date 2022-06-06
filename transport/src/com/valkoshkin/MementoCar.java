@@ -5,6 +5,7 @@ import com.valkoshkin.exceptions.DuplicateModelNameException;
 import com.valkoshkin.exceptions.ModelPriceOutOfBoundsException;
 import com.valkoshkin.exceptions.NoSuchModelNameException;
 import com.valkoshkin.model.Transport;
+import com.valkoshkin.visitor.Visitor;
 
 import java.io.*;
 import java.util.Arrays;
@@ -186,6 +187,11 @@ public class MementoCar implements Transport, Serializable {
         }
         clone.models = clonedModels;
         return clone;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+
     }
 
     public Memento createMemento() {

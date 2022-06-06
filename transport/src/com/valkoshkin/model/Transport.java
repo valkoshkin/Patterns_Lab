@@ -2,6 +2,7 @@ package com.valkoshkin.model;
 
 import com.valkoshkin.exceptions.DuplicateModelNameException;
 import com.valkoshkin.exceptions.NoSuchModelNameException;
+import com.valkoshkin.visitor.Visitor;
 
 import java.io.Serializable;
 
@@ -17,4 +18,5 @@ public interface Transport extends Cloneable, Serializable {
     void addModel(String name, double price) throws DuplicateModelNameException;
     void deleteModel(String name) throws NoSuchModelNameException;
     Transport clone() throws CloneNotSupportedException;
+    void accept(Visitor visitor);
 }
