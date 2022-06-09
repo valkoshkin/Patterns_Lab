@@ -12,6 +12,7 @@ public class StateApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(StateApplication.class.getResource("state-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+        stage.setResizable(false);
         stage.setTitle("State pattern application");
         stage.setScene(scene);
         stage.show();

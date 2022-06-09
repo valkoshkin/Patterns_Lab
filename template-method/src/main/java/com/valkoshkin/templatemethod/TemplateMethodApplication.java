@@ -13,6 +13,7 @@ public class TemplateMethodApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(TemplateMethodApplication.class.getResource("template-method-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 600);
 
+        stage.setResizable(false);
         stage.setTitle("Template Method pattern app");
         stage.setScene(scene);
         stage.show();
