@@ -5,6 +5,8 @@ import com.valkoshkin.exceptions.ModelPriceOutOfBoundsException;
 import com.valkoshkin.exceptions.NoSuchModelNameException;
 import com.valkoshkin.visitor.Visitor;
 
+import java.io.Serializable;
+
 public class Motorbike implements Transport {
     private String brand;
     private int length;
@@ -187,7 +189,12 @@ public class Motorbike implements Transport {
         visitor.visit(this);
     }
 
-    private class Model implements Cloneable {
+    @Override
+    public String getSimpleClassName() {
+        return Motorbike.class.getSimpleName();
+    }
+
+    private class Model implements Cloneable, Serializable {
         String name = null;
         double price = Double.NaN;
         Model prev = null;

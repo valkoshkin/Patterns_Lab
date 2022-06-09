@@ -194,6 +194,11 @@ public class MementoCar implements Transport, Serializable {
 
     }
 
+    @Override
+    public String getSimpleClassName() {
+        return MementoCar.class.getSimpleName();
+    }
+
     public Memento createMemento() {
         var memento = new Memento();
         memento.setCar(this);

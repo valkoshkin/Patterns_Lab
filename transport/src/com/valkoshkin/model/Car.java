@@ -7,6 +7,7 @@ import com.valkoshkin.exceptions.NoSuchModelNameException;
 import com.valkoshkin.visitor.Visitor;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.Writer;
 import java.util.Arrays;
 
@@ -194,7 +195,13 @@ public class Car implements Transport {
         visitor.visit(this);
     }
 
-    private class Model implements Cloneable {
+    @Override
+    public String getSimpleClassName() {
+        return Car.class.getSimpleName();
+    }
+
+
+    private class Model implements Cloneable, Serializable {
         private String name;
         private double price;
 

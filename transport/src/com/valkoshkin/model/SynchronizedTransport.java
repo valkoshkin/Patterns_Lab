@@ -70,4 +70,9 @@ public class SynchronizedTransport implements Transport {
     public void accept(Visitor visitor) {
 
     }
+
+    @Override
+    public String getSimpleClassName() {
+        return SynchronizedTransport.class.getSimpleName();
+    }
 }

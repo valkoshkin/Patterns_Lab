@@ -5,6 +5,11 @@ import com.valkoshkin.chain.TransportChainWriterColumn;
 import com.valkoshkin.chain.TransportChainWriterRow;
 import com.valkoshkin.command.PrintCarCommandColumn;
 import com.valkoshkin.command.PrintCarCommandRow;
+import com.valkoshkin.dao.TransportDAO;
+import com.valkoshkin.dao.factory.SerializedDAOFactory;
+import com.valkoshkin.dao.factory.TextDAOFactory;
+import com.valkoshkin.deprecated.factory.CarFactory;
+import com.valkoshkin.deprecated.factory.MotorbikeFactory;
 import com.valkoshkin.exceptions.DuplicateModelNameException;
 import com.valkoshkin.model.Car;
 import com.valkoshkin.model.Motorbike;
@@ -24,7 +29,8 @@ public class Main {
 //        testCommand();
 //        testIterator();
 //        testMemento();
-        testVisitor();
+//        testVisitor();
+        testDAO();
     }
 
     public static void testChainOfResponsibility() {
@@ -112,6 +118,40 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void testDAO() {
+        try {
+            String textFilePath = "transport/text-transport.txt";
+            String serializedFilePath = "transport/serialized-transport.b";
+
+            var textDAO = new TextDAOFactory().createTransportDAO(textFilePath);
+            var serializedDAO = new SerializedDAOFactory().createTransportDAO(serializedFilePath);
+
+            System.out.println("Creating files...\n");
+            createFilesForDAO(textDAO, serializedDAO);
+
+            var firstTransport = textDAO.readTransport();
+            var secondTransport = serializedDAO.readTransport();
+
+            System.out.println("\nTransport from text file:\n");
+            System.out.println(TransportUtils.getPreparedColumnString(firstTransport));
+
+            System.out.println("Deserealized transport:\n");
+            System.out.println(TransportUtils.getPreparedColumnString(secondTransport));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void createFilesForDAO(TransportDAO textDAO, TransportDAO serializedDAO) throws Exception {
+        Transport car = new Car("BMW", 2);
+        addCarModels(car);
+        Transport bike = new Motorbike("Yamaha", 5);
+        addMotorbikeModels(bike);
+
+        textDAO.writeTransport(car);
+        serializedDAO.writeTransport(bike);
     }
 
     public static void addCarModels(Transport transport) throws DuplicateModelNameException {

@@ -196,6 +196,11 @@ public class IterableCar implements Transport, Iterable<IterableCar.Model> {
 
     }
 
+    @Override
+    public String getSimpleClassName() {
+        return IterableCar.class.getSimpleName();
+    }
+
     public Iterator<Model> iterator() {
         return new CarIterator();
     }

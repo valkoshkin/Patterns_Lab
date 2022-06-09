@@ -19,4 +19,5 @@ public interface Transport extends Cloneable, Serializable {
     void deleteModel(String name) throws NoSuchModelNameException;
     Transport clone() throws CloneNotSupportedException;
     void accept(Visitor visitor);
+    String getSimpleClassName();
 }
