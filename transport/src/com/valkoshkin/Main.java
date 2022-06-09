@@ -26,11 +26,11 @@ public class Main {
 
     public static void main(String[] args) {
 //        testChainOfResponsibility();
-//        testCommand();
+        testCommand();
 //        testIterator();
 //        testMemento();
 //        testVisitor();
-        testDAO();
+//        testDAO();
     }
 
     public static void testChainOfResponsibility() {

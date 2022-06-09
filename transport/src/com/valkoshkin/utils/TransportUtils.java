@@ -64,8 +64,11 @@ public class TransportUtils {
     }
 
     public static String getPreparedRowString (Transport transport) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Brand: ").append(transport.getBrand()).append("; Models: [ ");
+        StringBuilder builder = new StringBuilder("Class: ")
+                .append(transport.getSimpleClassName())
+                .append("; Brand: ")
+                .append(transport.getBrand())
+                .append("; Models: [ ");
 
         String[] modelsNames = transport.getModelsNames();
         double[] modelsPrices = transport.getModelsPrices();
@@ -79,7 +82,7 @@ public class TransportUtils {
     }
 
     public static String getPreparedColumnString (Transport transport) {
-        StringBuilder builder = new StringBuilder("Simple class name: ")
+        StringBuilder builder = new StringBuilder("Class: ")
                 .append(transport.getSimpleClassName())
                 .append("\nBrand: ")
                 .append(transport.getBrand())
